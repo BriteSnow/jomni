@@ -1,0 +1,61 @@
+<!--
+	~ Copyright: 2014 Jeremy Chone
+	~ License: Apache V2 http://www.apache.org/licenses/LICENSE-2.0
+	-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.jomni</groupId>
+	<artifactId>jomni</artifactId>
+	<packaging>jar</packaging>
+	<version>0.2.0-SNAPSHOT</version>
+	<name>jomni</name>
+	<url>http://maven.apache.org</url>
+
+	<build>
+		<finalName>jomni</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<additionalparam>-Xdoclint:none</additionalparam>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		
+		<!-- Provided Dependencies -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- /Provided Dependencies -->
+
+	</dependencies>
+	
+	<distributionManagement>
+		<repository>
+			<id>britesnow-nexus-releases</id>
+			<url>http://nexus.britesnow.com/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>britesnow-nexus-snapshots</id>
+			<url>http://nexus.britesnow.com/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+</project>
