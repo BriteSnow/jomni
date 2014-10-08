@@ -1,4 +1,4 @@
-## Jomni: an Object Mapper micro-lib for Java 8
+## Jomni: an Object Mapper for Java 8
 
 ```java
 // build the immutable and threadsafe JomniMapper
@@ -19,6 +19,9 @@ List<User> users = userMapStream.map(mapper.as(User.class)).collect(Collectors.t
 
 // Wrap any object (Map or Pojo) into a Omni for normalized property access
 // and automatic type conversion (with fluid apis).
+Map userMap = mapper.omni(new HashMap()).setAll(user).get();
+
+// Omni is fluid
 User user = mapper.omni(new User()).setAll(userMap).set("username","johnd").get();
 
 // Transform any object to anything
@@ -27,13 +30,7 @@ Map userMap = mapper.omni(user).as(HashMap.class);
 // Push any object into another one. 
 User user = mapper.omni(userMap).into(User::new);
 
-// Creating a map that have all the properties of user
-Map userMap = mapper.omni(new HashMap()).setAll(user).get();
-
-// Or the opposite, creating a User object from a HashMap
-User userMap = mapper.omni(new User()).setAll(userMap).get();
-
-// Overriding TypeConvertor (or add new ones)
+// Overriding (or adding new) TypeConvertor at build time (with JomniBuilder)
 JomniMapper mapper = new JomniBuilder()
                          .addTypeConvertor(String.class,Long.class,str -> -1L)
                          .build();
@@ -44,8 +41,8 @@ More Example:  [org.jomni.test.ReadmeTest](https://github.com/BriteSnow/jomni/bl
 
 #### Jomni key points
 
-1. Micro-lib: ~25kb, < 15 java classes, and depends only on Java 8
-1. Extensible TypeConvertor model (utilizing the simplicity of Java 8 method reference and lambdas)
+1. ~25kb, < 15 java classes, and depends only on Java 8
+1. Extensible TypeConverter model (utilizing the simplicity of Java 8 method reference and lambdas)
 1. Provides Java 8 Function mappers ideal for Java 8 Optional and Stream .map apis. 
 1. jomniMapper.omni(anyObject) wrap a POJO or Map object with a Omni object.
 1. Omni normalizes and extends the properties access and type conversion (setters, getters, and property list) of its wrapped instance (Pojo or Map)
@@ -91,11 +88,10 @@ Current version is 0.2.0-SNAPSHOT (still under development, API may change)
 
 ## Why yet another java object mapper?
 
-Interestingly enough, there are no simple, lightweight, and expressive Object Mapper in Java. They are either very old and cumbersome to use (i.e. Apache BeanUtils), or [rightfully] targeted on their own domain (e.g., Jackson Mapper).
+Interestingly enough, there are no simple, lightweight, and expressive Object Mapper in Java. They are either very old and cumbersome to use (i.e. Apache BeanUtils), or [rightfully] targeted for their own domain (e.g., Jackson Mapper).
 
 Java 8 offers a great opportunity to rethink Java libraries and Jomni is one of the results of this rethinking. Jomni is built with the micro-library philosophy in mind, Java 8 centric, and have zero dependency beside Java 8.  
  
-
 ## Feedback 
 
 Feedback are more than welcome, in the github issue or at jeremy.chone@gmail.com

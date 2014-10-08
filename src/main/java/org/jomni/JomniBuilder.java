@@ -2,14 +2,14 @@ package org.jomni;
 
 public class JomniBuilder {
 
-	ConvertorRegistry convertorsOverride = new ConvertorRegistry();
+	ConverterRegistry convertersOverride = new ConverterRegistry();
 
 	public JomniMapper build(){
-		return new JomniMapper(convertorsOverride);
+		return new JomniMapper(convertersOverride);
 	}
 
-	public <T, R> void addTypeConvertor(Class<T> source, Class<R> target, TypeConvertor<T, R> typeConvertor) {
-		convertorsOverride.registerTypeConvertor(source, target, typeConvertor);
+	public <T, R> void addTypeConverter(Class<T> source, Class<R> target, TypeConverter<T, R> typeConverter) {
+		convertersOverride.addTypeConverter(source, target, typeConverter);
 	}
 
 }

@@ -25,20 +25,20 @@ import static org.jomni.util.Maps.mapOf;
 public class JomniMapper {
 
 	private enum ConvertType {
-		identity, none, convertor, complex;
+		identity, none, converter, complex;
 	}
 
 	Map<Class, ClassInfo> classInfoByClass = new ConcurrentHashMap<>(16, 0.9f, 1);
 
-	ConvertorRegistry convertorRegistry = new ConvertorRegistry();
+	ConverterRegistry converterRegistry = new ConverterRegistry();
 
 
 	/**
 	 * Packaged scope constructor to force use of Builder.
 	 */
-	JomniMapper(ConvertorRegistry override){
-		convertorRegistry.init();
-		convertorRegistry.getRegistry().putAll(override.getRegistry());
+	JomniMapper(ConverterRegistry override){
+		converterRegistry.init();
+		converterRegistry.getRegistry().putAll(override.getRegistry());
 	}
 
 	/**
@@ -86,9 +86,9 @@ public class JomniMapper {
 			targetClass = (implClass != null)?implClass:null;
 		}
 
-		Pair<ConvertType, TypeConvertor<T, R>> convertorInfo = getConvertInfo(value, targetClass);
-		JomniMapper.ConvertType converterType = convertorInfo.getA();
-		TypeConvertor<T, R> typeConvertor = convertorInfo.getB();
+		Pair<ConvertType, TypeConverter<T, R>> converterInfo = getConvertInfo(value, targetClass);
+		JomniMapper.ConvertType converterType = converterInfo.getA();
+		TypeConverter<T, R> typeConverter = converterInfo.getB();
 		try {
 			if (converterType == ConvertType.complex) {
 				R targetObject = targetClass.newInstance();
@@ -96,7 +96,7 @@ public class JomniMapper {
 				Omni<R> jTarget = omni(targetObject);
 				return jTarget.setAll(jSource).get();
 			} else {
-				return convert(converterType, typeConvertor, value, targetClass);
+				return convert(converterType, typeConverter, value, targetClass);
 			}
 		} catch (InstantiationException | IllegalAccessException e) {
 			throw new RuntimeException(e);
@@ -104,7 +104,7 @@ public class JomniMapper {
 	}
 
 
-	private <T, R> Pair<ConvertType, TypeConvertor<T, R>> getConvertInfo(T instance, Class<R> targetClass) {
+	private <T, R> Pair<ConvertType, TypeConverter<T, R>> getConvertInfo(T instance, Class<R> targetClass) {
 		boolean isNull = (instance == null);
 
 		if (instance != null && (targetClass.equals(instance.getClass()) || targetClass.isAssignableFrom(instance.getClass()))) {
@@ -113,13 +113,13 @@ public class JomniMapper {
 
 		Class sourceClass = (isNull) ? null : instance.getClass();
 		if (!isNull) {
-			TypeConvertor typeConvertor = convertorRegistry.resolveConvertor(sourceClass, targetClass);
-			if (typeConvertor != null) {
-				return new Pair(ConvertType.convertor, typeConvertor);
+			TypeConverter typeConverter = converterRegistry.resolveTypeConverter(sourceClass, targetClass);
+			if (typeConverter != null) {
+				return new Pair(ConvertType.converter, typeConverter);
 			}
 		}
 
-		// now, if no type convertors and if instance is null, then, the none convert type will be applied
+		// now, if no type converters and if instance is null, then, the none convert type will be applied
 		if (instance == null) {
 			return new Pair(ConvertType.none, null);
 		}
@@ -155,14 +155,14 @@ public class JomniMapper {
 
 
 	// --------- Helpers --------- //
-	private <T, R> R convert(ConvertType convertType, TypeConvertor<T, R> typeConvertor, T source, Class<R> targetClass) {
+	private <T, R> R convert(ConvertType convertType, TypeConverter<T, R> typeConverter, T source, Class<R> targetClass) {
 		switch (convertType) {
 			case identity:
 				return (R) source;
 			case none:
 				return null; // TODO: later, return default null
-			case convertor:
-				return typeConvertor.convert(source);
+			case converter:
+				return typeConverter.convert(source);
 			case complex:
 				return as(targetClass, source);
 			default:

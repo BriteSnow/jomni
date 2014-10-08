@@ -112,10 +112,10 @@ public class ReadmeTest {
 	}
 
 	@Test
-	public void mapperCustomConvertor(){
+	public void mapperCustomConverter(){
 		JomniBuilder builder = new JomniBuilder();
 		// type converter than converter any string to -1L
-		builder.addTypeConvertor(String.class, Long.class, str -> -1L);
+		builder.addTypeConverter(String.class, Long.class, str -> -1L);
 		JomniMapper mapper = builder.build();
 
 		// should always transform to -1L

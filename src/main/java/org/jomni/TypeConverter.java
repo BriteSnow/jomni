@@ -6,13 +6,13 @@
 package org.jomni;
 
 /**
- * Convertor which needs to be define for a given targetType.
+ * Converter which needs to be define for a given targetType.
  *
- * TODO: We might add a ValueConvertor where the targetType will be passed as an argument
+ * TODO: We might add a ValueConverter where the targetType will be passed as an argument
  * 		 allowing doing on demand type logic (would be good for Enum which is handled as a specific case)
  */
 @FunctionalInterface
-public interface TypeConvertor<T, R> {
+public interface TypeConverter<T, R> {
 
 	R convert(T instance);
 

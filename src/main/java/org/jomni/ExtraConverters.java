@@ -15,7 +15,7 @@ import java.util.Optional;
 /**
  * <p></p>
  */
-public class ExtraConvertors {
+public class ExtraConverters {
 
 
 	static Date localDateTimeToDate(LocalDateTime ldt){
