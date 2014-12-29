@@ -72,6 +72,11 @@ public class ConverterRegistry {
 		addTypeConverter(LocalDate.class, LocalDateTime.class, (LocalDate instance) -> instance.atStartOfDay());
 		addTypeConverter(LocalDateTime.class, Date.class, ExtraConverters::localDateTimeToDate);
 		addTypeConverter(Date.class, LocalDateTime.class, ExtraConverters::dateToLocalDateTime);
+		addTypeConverter(String.class, LocalDateTime.class,ExtraConverters::stringToLocalDateTime);
+		addTypeConverter(LocalDateTime.class, String.class,ExtraConverters::localDateTimeToString);
+		addTypeConverter(String.class, LocalDate.class,ExtraConverters::stringToLocalDate);
+		addTypeConverter(LocalDate.class, String.class,ExtraConverters::localDateToString);
+
 	}
 
 	<T, R> void addTypeConverter(Class<T> source, Class<R> target, TypeConverter<T, R> typeConverter) {

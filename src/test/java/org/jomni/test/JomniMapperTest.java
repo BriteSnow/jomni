@@ -40,6 +40,7 @@ public class JomniMapperTest {
 	}
 
 
+
 	@Test
 	public void testMapperAsSimpleType(){
 		JomniMapper j = new JomniBuilder().build();

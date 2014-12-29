@@ -31,12 +31,12 @@ List<User> users = userMapStream.map(mapper.as(User.class))
 // ------ Omni examples  ------- //
 // Omni is a wrapper around either a typed object, or a map, that 
 //   a) provides a single api to access name value pairs in both (POJO or Map)
-//   b) automatically coerces values to the targeted type (in the case of a Pojo)
+//   b) automatically coerces values to the targeted type (for Pojo targets)
 
 // Create an Omni from a new HashMap and populate it with properties from a POJO Object (User)
 Map userMap = mapper.omni(new HashMap()).setAll(user).get();
 
-// Omni offers fuild APIs
+// Omni offers fluid APIs
 User user = mapper.omni(new User()).setAll(userMap).set("username","johnd").get();
 
 // Can also be used to get any Composite type from any Composite type
@@ -61,8 +61,8 @@ More Example:  [org.jomni.test.ReadmeTest](https://github.com/BriteSnow/jomni/bl
 1. Extensible TypeConverter model (utilizing the simplicity of Java 8 method reference and lambdas)
 1. Provides Java 8 Function mappers ideal for Java 8 Optional and Stream .map apis. 
 1. jomniMapper.omni(anyObject) wrap a POJO or Map object with a Omni object.
-1. Omni unified API to set and get properties from a Map or a Pojo object and provide automatic type conversion. omni.get("username") and omni.set("username","johnd").
-1. Omni normalizes and extends the properties access and type conversion (setters, getters, and property list) of its wrapped instance (Pojo or Map).
+1. Omni provides a single api to access name value pairs in both (POJO or Map). (e.g., omni.get("username"), omni.set("username","johnd"), omni.setAll(someMap).
+1. Omni setters automatically coerces values to the targeted type (for Pojo targets)
 1. Omni APIs are fluid and directly change the wrapped object appropriately (do not share across thread).
 
 *Still in development mode (i.e. 0.x version), API might change, but functionality will probably only increase.*

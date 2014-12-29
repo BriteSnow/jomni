@@ -6,9 +6,11 @@
 package org.jomni;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Optional;
 
@@ -17,6 +19,8 @@ import java.util.Optional;
  */
 public class ExtraConverters {
 
+	static private DateTimeFormatter localDateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+	static private DateTimeFormatter localDateFormatter = DateTimeFormatter.ISO_LOCAL_DATE;
 
 	static Date localDateTimeToDate(LocalDateTime ldt){
 		ZonedDateTime zdt = ldt.atZone(ZoneId.systemDefault());
@@ -25,6 +29,22 @@ public class ExtraConverters {
 
 	static LocalDateTime dateToLocalDateTime(Date date){
 		return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+	}
+
+	static LocalDateTime stringToLocalDateTime(String str){
+		return LocalDateTime.parse(str,localDateTimeFormatter);
+	}
+
+	static String localDateTimeToString(LocalDateTime ldt) {
+		return localDateTimeFormatter.format(ldt);
+	}
+
+	static LocalDate stringToLocalDate(String str){
+		return LocalDate.parse(str,localDateFormatter);
+	}
+
+	static String localDateToString(LocalDate ld) {
+		return localDateFormatter.format(ld);
 	}
 
 	static boolean toBoolean(String name, Optional<Object> val) {

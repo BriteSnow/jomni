@@ -7,6 +7,7 @@ import org.jomni.test.app.Tests;
 import org.jomni.test.app.User;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,5 +46,18 @@ public class JomniTest {
 		Tests.validateUser(user);
 	}
 
+
+	@Test
+	public void testLocalDateTime(){
+		JomniMapper j = new JomniBuilder().build();
+
+		String strSample = "2014-12-29T15:29:46";
+		LocalDateTime ldt = LocalDateTime.of(2014,12,29,15,29,46);
+		String str = j.as(String.class,ldt);
+		assertEquals(strSample,str);
+
+		LocalDateTime ldtFromStr = j.as(LocalDateTime.class,strSample);
+		assertEquals(ldt,ldtFromStr);
+	}
 
 }
