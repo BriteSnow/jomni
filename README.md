@@ -43,7 +43,7 @@ User user = mapper.omni(new User()).setAll(userMap).set("username","johnd").get(
 Map userMap = mapper.omni(user).as(HashMap.class);
 
 // Push any object into another one. 
-User user = mapper.omni(userMap).into(User::new);
+User user = mapper.omni(userMap).into(new User());
 
 // ------ Extending the mapper ------- //
 // Overriding (or adding new) TypeConvertor at build time (with JomniBuilder)
@@ -77,31 +77,16 @@ User user = mapper.omni(userPart1).setAll(userPart2, SetterRule.not_nulls, Sette
 
 ## Maven
 
-Not yet on Maven Central, but will be there soon. Until now, you can setup the britesnow.com nexus repository
+Current version is 0.2.0-SNAPSHOT (in maven central)
 
-```xml
-<repositories>  
-    <!-- for jomni -->
-    <repository>
-        <id>BriteSnow Releases</id>
-        <url>http://nexus.britesnow.com/nexus/content/repositories/releases/</url>
-    </repository>
-    <repository>
-        <id>BriteSnow Snapshots</id>
-        <url>http://nexus.britesnow.com/nexus/content/repositories/snapshots/</url>
-    </repository>   
-    <!-- /for jomni -->
-</repositories>
-```
-
-Current version is 0.2.0-SNAPSHOT (still under development, API may change)
 ```xml
 <dependency>
     <groupId>org.jomni</groupId>
     <artifactId>jomni</artifactId>
     <version>0.2.0-SNAPSHOT</version>
 </dependency>
-```   
+```
+
 
 ## Why yet another java object mapper?
 

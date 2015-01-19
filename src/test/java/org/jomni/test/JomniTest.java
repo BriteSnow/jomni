@@ -13,6 +13,7 @@ import java.util.Map;
 
 import static org.jomni.util.Maps.mapOf;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class JomniTest {
 
@@ -58,6 +59,14 @@ public class JomniTest {
 
 		LocalDateTime ldtFromStr = j.as(LocalDateTime.class,strSample);
 		assertEquals(ldt,ldtFromStr);
+	}
+
+	@Test
+	public void testNullVal() {
+		JomniMapper j = new JomniBuilder().build();
+
+		Long num = j.as(Long.class, null);
+		assertNull(num);
 	}
 
 }
