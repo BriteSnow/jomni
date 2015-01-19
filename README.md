@@ -77,16 +77,19 @@ User user = mapper.omni(userPart1).setAll(userPart2, SetterRule.not_nulls, Sette
 
 ## Maven
 
-Current version is 0.2.0-SNAPSHOT (in maven central)
+Jomni is in Maven Central. So, just add the dependency, and you should be all set. 
+
+Current version is 0.2.0 (in maven central)
 
 ```xml
 <dependency>
     <groupId>org.jomni</groupId>
     <artifactId>jomni</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
+Latest Snapshot: 0.3.0-SNAPSHOT
 
 ## Why yet another java object mapper?
 
