@@ -8,6 +8,7 @@ public class User {
 
 	private Long id;
 	private Role role;
+	private Company company;
 	private String username;
 	private Integer since;
 
@@ -25,6 +26,14 @@ public class User {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
 	public String getUsername() {
