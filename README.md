@@ -76,6 +76,7 @@ User user = mapper.omni(userPart1).setAll(userPart2, SetterRule.not_nulls, Sette
 ```
 
 ## Maven
+[j8ql Maven version](http://mvnrepository.com/artifact/org.jomni/jomni)
 
 Jomni is in Maven Central. So, just add the dependency, and you should be all set. 
 
@@ -89,7 +90,7 @@ Current version is 0.2.0 (in maven central)
 </dependency>
 ```
 
-Latest Snapshot: 0.3.0-SNAPSHOT
+
 
 ## Why yet another java object mapper?
 
