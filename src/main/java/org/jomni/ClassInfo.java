@@ -11,7 +11,9 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 import java.util.*;
+import java.util.stream.Stream;
 
 import static java.lang.String.format;
 
@@ -45,8 +47,14 @@ public class ClassInfo {
 						ParameterizedType type = (ParameterizedType) returnType;
 						Type[] typeArguments = type.getActualTypeArguments();
 						// TODO: should probably get the first only
-						for(Type typeArgument : typeArguments){
-							propGenericType = (Class) typeArgument;
+						for(Type typeArgument : typeArguments) {
+							System.out.println("typeArgument for (" + propName + ") " + typeArgument);
+							if (typeArgument instanceof Class){
+								propGenericType = (Class) typeArgument;
+							}else if (typeArgument instanceof TypeVariable){
+								// Not sure we can do something for now, but perhaps we can check the generic name with the
+								// owner class.
+							}
 						}
 					}
 

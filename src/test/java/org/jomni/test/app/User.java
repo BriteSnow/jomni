@@ -1,24 +1,17 @@
 package org.jomni.test.app;
 
-public class User {
+import java.util.Optional;
+
+public class User extends BaseEntity<Long> {
 
 	public enum Role {
 		visitor, user, admin;
 	}
 
-	private Long id;
 	private Role role;
 	private Company company;
 	private String username;
 	private Integer since;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Role getRole() {
 		return role;
