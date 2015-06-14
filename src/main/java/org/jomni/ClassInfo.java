@@ -48,7 +48,6 @@ public class ClassInfo {
 						Type[] typeArguments = type.getActualTypeArguments();
 						// TODO: should probably get the first only
 						for(Type typeArgument : typeArguments) {
-							System.out.println("typeArgument for (" + propName + ") " + typeArgument);
 							if (typeArgument instanceof Class){
 								propGenericType = (Class) typeArgument;
 							}else if (typeArgument instanceof TypeVariable){
