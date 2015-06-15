@@ -8,7 +8,7 @@
 
 	<groupId>org.jomni</groupId>
 	<artifactId>jomni</artifactId>
-	<version>0.2.1</version>
+	<version>0.2.2-SNAPSHOT</version>
 	<name>jomni</name>
 
 	<packaging>jar</packaging>
